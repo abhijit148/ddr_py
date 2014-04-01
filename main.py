@@ -42,25 +42,31 @@ x,y=height/2,width/2
 start=datetime.now()
 i=0
 
+score=0
+
 #Initial flipping for mirror effect
 t_minus = cv2.flip(t_minus,1)
 t = cv2.flip(t,1)
 t_plus = cv2.flip(t_plus,1)
 
 while True:
+  #Printing out the scores
+  cv2.putText(img, "Score: "+str(score),(width/3,height/9) , cv2.FONT_HERSHEY_PLAIN, 2.0, color=(0,0,0), thickness=2)
 
+  #For each move
   if i<len(moves):
     dir,timing=moves[i] #timing is the time under which the action must be performed.
     y1,y2,x1,x2=coords[dir]
     diff=diffImg(t_minus[y1:y2, x1:x2], t[y1:y2, x1:x2], t_plus[y1:y2, x1:x2]) 
-
-    if cv2.countNonZero(diff) < 1750 and (datetime.now()-start).total_seconds()<=timing: #1750 is our threshold
+    current=datetime.now()
+    if cv2.countNonZero(diff) < 1750 and (current-start).total_seconds()<=timing: #1750 is our threshold
       text_color = (255,0,0) #color as (B,G,R)
-      
-      #cv2.putText(img, action, (x,y), cv2.FONT_HERSHEY_PLAIN, 4.0, text_color, thickness=2)
       img,x,y=arrows.animate(img,x,y,dir)
 
     else:
+      if(current-start).total_seconds()<=timing:
+        score+=25
+
       i+=1
       x,y=height/2,width/2
 
