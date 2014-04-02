@@ -34,7 +34,8 @@ limit=2
 moves=[("nw",1.5),
   ("ne",1.5),
   ("sw",3.5),
-  ("se",4.5) ]
+  ("se",4.5),
+  ("se",10) ]
 
 
 while True:
@@ -43,11 +44,12 @@ while True:
 
   completed,notCompleted=movement.completed(moves,start,t_minus,t,t_plus,limit)
   img=arrows.drawMoves(img,notCompleted,start,limit)
-  score+=25*len(completed)
-  for move in moves:
-    if move in completed:
-      moves.remove(move)
 
+  #Calculating score and ensuring non-repetition of completed moves
+  score+=25*len(completed)
+  for move in completed:
+    moves.remove(move)
+    
   cv2.imshow(imgWindow,img)
 
   # Read next image
