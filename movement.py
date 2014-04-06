@@ -8,13 +8,16 @@ def diffImg(t0, t1, t2):
   return cv2.bitwise_and(d1, d2)
 
 def movesInTime(moves,start,limit):
+  toPaint=[]
   toPerform=[]
   current=datetime.datetime.now()
   for move in moves:
     dir,timing=move
     if current>start+datetime.timedelta(0,timing) and current<start+datetime.timedelta(0,timing)+datetime.timedelta(0,limit):
+      toPaint.append(move)
+    if current>start+datetime.timedelta(0,timing)+datetime.timedelta(0,limit/2) and current<start+datetime.timedelta(0,timing)+datetime.timedelta(0,limit):
       toPerform.append(move)
-  return toPerform
+  return toPaint,toPerform
 
 def actions(t_minus,t,t_plus):
   directions=['nw','ne','se','sw']
@@ -36,13 +39,11 @@ def actions(t_minus,t,t_plus):
 
 def completed(moves,start,t_minus,t,t_plus,limit):
   completed=[]
-  notCompleted=[]
   dirs=actions(t_minus,t,t_plus)
-  toPerform=movesInTime(moves,start,limit)
+  toPaint,toPerform=movesInTime(moves,start,limit)
   for move in toPerform:
     dir,timing=move
-    if dir in dirs:
+    if dir in dirs and dir not in [m[0] for m in completed]:
       completed.append(move)
-    else:
-      notCompleted.append(move)
-  return completed,notCompleted
+      toPaint.remove(move)
+  return completed,toPaint
