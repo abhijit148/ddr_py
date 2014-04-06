@@ -33,13 +33,13 @@ def actions(t_minus,t,t_plus):
   for dir in directions:
     y1,y2,x1,x2=coords[dir]
     diff=diffImg(t_minus[y1:y2, x1:x2], t[y1:y2, x1:x2], t_plus[y1:y2, x1:x2])
-    if cv2.countNonZero(diff) > 1750:
+    if cv2.countNonZero(diff) > 1500:
       actions.append(dir)
   return actions
 
-def completed(moves,start,t_minus,t,t_plus,limit):
+def completed(moves,start,dirs,limit):
   completed=[]
-  dirs=actions(t_minus,t,t_plus)
+  #dirs=actions(t_minus,t,t_plus)
   toPaint,toPerform=movesInTime(moves,start,limit)
   for move in toPerform:
     dir,timing=move

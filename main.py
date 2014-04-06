@@ -46,17 +46,20 @@ moves=[("nw",1.5),
 
 
 while True:
+  
+  dirsCompleted=movement.actions(t_minus,t,t_plus)
+  img=arrows.setScreen(img,dirsCompleted)
+
   #Printing out the scores
-  img=arrows.setScreen(img)
   cv2.putText(img, str(score),(width/2,height/9) , cv2.FONT_HERSHEY_PLAIN, 2.0, color=(0,0,0), thickness=2)
-  completed,notCompleted=movement.completed(moves,start,t_minus,t,t_plus,limit)
+  completed,notCompleted=movement.completed(moves,start,dirsCompleted,limit)
   img=arrows.drawMoves(img,notCompleted,start,limit)
 
   #Calculating score and ensuring non-repetition of completed moves
   score+=25*len(completed)
   for move in completed:
     moves.remove(move)
-    
+
   cv2.imshow(imgWindow,img)
 
   # Read next image

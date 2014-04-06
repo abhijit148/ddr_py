@@ -10,11 +10,32 @@ arrows={
 	'sw':'images/sw.png'
 }
 
+completedArrows={
+	'ne':'images/nec.png',
+	'nw':'images/nwc.png',
+	'se':'images/sec.png',
+	'sw':'images/swc.png'
+}
+
+lastCompleted=[]
+lastUpdated=None
+
 #Paste fixed arrows on the image in all 4 corners
-def setScreen(img):
+def setScreen(img,completed):
+	global lastCompleted
+	global lastUpdated
+	current=datetime.now()
+	if len(completed)>0:
+		lastCompleted=completed
+		lastUpdated=current
+
 	dirs=['ne','nw','se','sw']
+
 	for dir in dirs:
-		obj=cv2.imread(arrows[dir],cv2.IMREAD_UNCHANGED)
+		if dir in lastCompleted and (current-lastUpdated).total_seconds()<0.25:
+			obj=cv2.imread(completedArrows[dir],cv2.IMREAD_UNCHANGED)
+		else:
+			obj=cv2.imread(arrows[dir],cv2.IMREAD_UNCHANGED)
 		x,y=finalCoords(img,obj,dir)
 		img=overlayImage(img,obj,x,y)
 	return img
