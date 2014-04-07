@@ -5,6 +5,15 @@ from datetime import datetime
 #implemented separately in same folder
 import arrows
 import movement
+from tracks import gangnam
+
+import pyglet
+
+#The song moves data
+songFile,moves=gangnam.songFile,gangnam.moves
+song = pyglet.media.load(songFile)
+song.play()
+#pyglet.app.run()
 
 #Create a window
 imgWindow="Image from Camera"
@@ -33,17 +42,6 @@ height = np.size(img, 0)
 start=datetime.now()
 score=0
 limit=2
-
-#The song moves data
-moves=[("nw",1.5),
-  ("ne",1.5),
-  ("sw",3.5),
-  ("se",4.5),
-  ("se",5.0),
-  ("se",5.5),
-  ("se",6.0),
-  ("se",10) ]
-
 
 while True:
   
