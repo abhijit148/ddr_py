@@ -118,5 +118,5 @@ class gangnam:
 	('ne',77.655729)]
 	moves=[]
 	for move in gangnam_raw:
-		moves.append((move[0],move[1]+0.5))
+		moves.append((move[0],move[1]))
 	songFile='gangnam.wav'

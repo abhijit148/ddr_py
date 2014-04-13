@@ -15,7 +15,7 @@ def movesInTime(moves,start,limit):
     dir,timing=move
     if current>start+datetime.timedelta(0,timing) and current<start+datetime.timedelta(0,timing)+datetime.timedelta(0,limit):
       toPaint.append(move)
-    if current>start+datetime.timedelta(0,timing)+datetime.timedelta(0,limit/2) and current<start+datetime.timedelta(0,timing)+datetime.timedelta(0,limit):
+    if current>start+datetime.timedelta(0,timing)+datetime.timedelta(0,2*limit/3) and current<start+datetime.timedelta(0,timing)+datetime.timedelta(0,limit):
       toPerform.append(move)
   return toPaint,toPerform
 

@@ -41,7 +41,7 @@ height = np.size(img, 0)
 #Other initialization variables
 start=datetime.now()
 score=0
-limit=2
+limit=1
 
 while True:
   
