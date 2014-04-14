@@ -74,8 +74,6 @@ class Game:
 		width = np.size(img, 1)
 		height = np.size(img, 0)
 
-		start=datetime.now()
-
 		#Play music
 		song = pyglet.media.load(songFile)
 		song.play()
@@ -85,11 +83,13 @@ class Game:
 		controller=gameController()
 		painter=gamePainter()
 
+		start=datetime.now()
+
 		while True:
-			#print moves
+			
 			moves,dirs=controller.detectMoves(start,limit,moves,t_minus,t,t_plus)
 			score=scorer.getScore(moves)
-			#print moves
+			
 			img=painter.paint(img,moves,dirs,score,start,limit)
 
 			cv2.imshow(imgWindow,img)

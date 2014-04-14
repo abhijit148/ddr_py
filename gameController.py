@@ -11,7 +11,7 @@ class gameController:
 		toPerform=self.movesInTime(moves,start,limit)
 		for move in moves:
 			dir,timing,completed=move
-			if dir in dirs and dir in [m[0] for m in toPerform]:
+			if dir in dirs and move in toPerform:
 				completed=True
 			movesNow.append((dir,timing,completed))
 		return movesNow,dirs
@@ -21,7 +21,7 @@ class gameController:
 		current=datetime.datetime.now()
 		for move in moves:
 			dir,timing,completed=move
-			if current>start+datetime.timedelta(0,timing)+datetime.timedelta(0,2*limit/3) and current<start+datetime.timedelta(0,timing)+datetime.timedelta(0,limit):
+			if completed==False and current>start+datetime.timedelta(0,timing)+datetime.timedelta(0,3*float(limit)/4) and current<start+datetime.timedelta(0,timing)+datetime.timedelta(0,limit):
 				toPerform.append(move)
 		return toPerform
 

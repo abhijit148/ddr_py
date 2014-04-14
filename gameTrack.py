@@ -129,4 +129,4 @@ class gameTrack:
 		self.track=self.trackData[Name]
 		self.songFile=self.track[0]
 		for move in self.track[1]:
-			self.moves.append((move[0],move[1],False))
+			self.moves.append((move[0],move[1]+1,False))
