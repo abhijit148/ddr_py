@@ -57,7 +57,6 @@ class Game:
 
 		# Read three images first (for difference calculation):
 		cam = cv2.VideoCapture(0)
-
 		t_minus = cv2.cvtColor(cam.read()[1], cv2.COLOR_RGB2GRAY)
 		t = cv2.cvtColor(cam.read()[1], cv2.COLOR_RGB2GRAY)
 		img=cam.read()[1]
