@@ -5,9 +5,9 @@ import game
 menu=chooseOption.Menu()
 menu.show()
 
-check=playerCheck.Check()
-check.isValid()
+#check=playerCheck.Check()
+#check.isValid()
 
-ddr=game.Game()
-ddr.initiate()
-ddr.play()
+#ddr=game.Game()
+#ddr.initiate()
+#ddr.play()
