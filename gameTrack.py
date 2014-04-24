@@ -122,7 +122,7 @@ class gameTrack:
 		('ne',77.655729)]
 
 	trackData={
-	"gangnam":['gangnam.wav',gangnam_raw]
+	"gangnam":['music/gangnam.wav',gangnam_raw]
 	}
 
 	def set(self,Name):
